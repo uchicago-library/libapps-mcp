@@ -1,0 +1,5 @@
+[
+  {"id": 8001, "name": "", "description": "<p>Welcome to the <a href=\"/chemistry/spectra\">spectra page</a>.</p>", "url": "", "site_id": 1, "type_id": 1, "owner_id": 501, "az_vendor_id": 0, "meta": null, "created": "", "updated": "", "slug_id": 0, "enable_hidden": "0"},
+  {"id": 8002, "name": "", "description": "<p>HIDDEN-ASSET text</p>", "url": "", "site_id": 1, "type_id": 1, "owner_id": 501, "az_vendor_id": 0, "meta": null, "created": "", "updated": "", "slug_id": 0, "enable_hidden": "1"},
+  {"id": 8003, "name": "", "description": "<ul><li>Use the handbook</li></ul>", "url": "", "site_id": 1, "type_id": 1, "owner_id": 501, "az_vendor_id": 0, "meta": null, "created": "", "updated": "", "slug_id": 0, "enable_hidden": 0}
+]

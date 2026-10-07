@@ -1,0 +1,28 @@
+[
+  {
+    "id": 101, "type_id": 3, "site_id": 1, "owner_id": 501, "name": "Chemistry Research",
+    "description": "Finding chemical literature and data", "redirect_url": "", "status": 1,
+    "updated": "2026-01-15 10:00:00", "type_label": "Subject Guide",
+    "url": "https://guides.example.edu/c.php?g=101", "friendly_url": "https://guides.example.edu/chemistry",
+    "subjects": [{"id": "9001", "name": "Chemistry", "slug_id": "0"}],
+    "pages": [
+      {"id": "2001", "type_id": "1", "name": "Home", "description": "", "redirect_url": "", "parent_id": "0", "source_id": "0", "num_cols": "2", "column_layout": "{}", "enable_display": "1", "enable_newwin": "0", "position": "0", "url": "https://guides.example.edu/c.php?g=101&p=2001", "slug_id": "0", "friendly_url": "", "er_course_id": "0",
+       "boxes": [
+         {"id": "3001", "name": "Article Databases", "type_id": "1", "enable_display": "1", "count_mapped": "0", "map_id": "1", "position": "1", "column_id": "1"},
+         {"id": "3002", "name": "Getting Started", "type_id": "1", "enable_display": "1", "count_mapped": "0", "map_id": "2", "position": "0", "column_id": "1"},
+         {"id": "3003", "name": "Hidden Box", "type_id": "1", "enable_display": "0", "count_mapped": "0", "map_id": "3", "position": "2", "column_id": "1"},
+         {"id": "3004", "name": "Ask Us", "type_id": "4", "enable_display": "1", "count_mapped": "0", "map_id": "4", "position": "0", "column_id": "2"},
+         {"id": "3008", "name": "Removed Box", "type_id": "1", "enable_display": "1", "count_mapped": "0", "map_id": "5", "position": "1", "column_id": "2"}
+       ]},
+      {"id": "2002", "name": "Spectra", "redirect_url": "", "parent_id": "2001", "enable_display": "1", "position": "1", "url": "https://guides.example.edu/c.php?g=101&p=2002", "friendly_url": "https://guides.example.edu/chemistry/spectra",
+       "boxes": [{"id": "3005", "name": "Spectra Tools", "type_id": "1", "enable_display": "1", "position": "0", "column_id": "1"}]},
+      {"id": "2003", "name": "Safety", "redirect_url": "", "parent_id": "2001", "enable_display": "1", "position": "0", "url": "https://guides.example.edu/c.php?g=101&p=2003", "friendly_url": "",
+       "boxes": [{"id": "3006", "name": "Safety Basics", "type_id": "1", "enable_display": "1", "position": "0", "column_id": "1"}]},
+      {"id": "2004", "name": "Hidden Page", "redirect_url": "", "parent_id": "0", "enable_display": "0", "position": "1", "url": "https://guides.example.edu/c.php?g=101&p=2004", "friendly_url": ""},
+      {"id": "2005", "name": "Books", "redirect_url": "", "parent_id": "0", "enable_display": "1", "position": "2", "url": "https://guides.example.edu/c.php?g=101&p=2005", "friendly_url": "",
+       "boxes": [{"id": "3007", "name": "Find Books", "type_id": "1", "enable_display": "1", "position": "0", "column_id": "1"}]},
+      {"id": "2006", "name": "Library Catalog", "redirect_url": "https://catalog.example.org/", "parent_id": "2001", "enable_display": "1", "position": "2", "url": "https://guides.example.edu/c.php?g=101&p=2006", "friendly_url": "", "boxes": []},
+      {"id": "2007", "name": "Under Hidden", "redirect_url": "", "parent_id": "2004", "enable_display": "1", "position": "0", "url": "https://guides.example.edu/c.php?g=101&p=2007", "friendly_url": "", "boxes": []}
+    ]
+  }
+]

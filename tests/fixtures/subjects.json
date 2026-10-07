@@ -1,0 +1,5 @@
+[
+  {"id": "9001", "parent_id": "0", "name": "Chemistry", "slug_id": "0", "slug": null},
+  {"id": "9002", "parent_id": "0", "name": "History", "slug_id": "0", "slug": null},
+  {"id": "9003", "parent_id": "0", "name": "History of Science", "slug_id": "0", "slug": "history-science"}
+]

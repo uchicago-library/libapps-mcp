@@ -1,0 +1,4 @@
+[
+  {"id": 7001, "name": "Chem Abstracts Example", "type_id": 10, "enable_hidden": "0", "alt_names": "SciChem Finder", "enable_new": 1, "enable_trial": 0, "enable_popular": "1", "internal_note": "INTERNAL-NOTE-renewal pending", "library_review": "LIBRARY-REVIEW-text"},
+  {"id": 7002, "name": "History Archive Online", "type_id": 10, "enable_hidden": "0", "alt_names": "", "enable_new": "0", "enable_trial": "1", "enable_popular": 0, "internal_note": "INTERNAL-NOTE-other", "library_review": ""}
+]
