@@ -1,8 +1,8 @@
 import pytest
 from conftest import SECRET
 
-from uc_libapps_mcp.config import DEFAULT_API_BASE, load_settings
-from uc_libapps_mcp.errors import LibAppsError
+from libapps_mcp.config import DEFAULT_API_BASE, load_settings
+from libapps_mcp.errors import LibAppsError
 
 CREDS = {"LIBAPPS_CLIENT_ID": "12345", "LIBAPPS_CLIENT_SECRET": SECRET}
 
@@ -16,7 +16,7 @@ def test_defaults():
     assert settings.expose_email is False
     assert (settings.ttl_list, settings.ttl_ref, settings.ttl_content) == (1800, 86400, 900)
     assert (settings.timeout, settings.max_concurrency, settings.max_chars) == (30.0, 4, 20000)
-    assert settings.user_agent.startswith("uc-libapps-mcp/0.1.0")
+    assert settings.user_agent.startswith("libapps-mcp/0.1.0")
 
 
 @pytest.mark.parametrize(

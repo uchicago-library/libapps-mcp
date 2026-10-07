@@ -1,6 +1,6 @@
 import pytest
 
-from uc_libapps_mcp.errors import LibAppsError
+from libapps_mcp.errors import LibAppsError
 
 
 def test_list_subjects(fake, make_service):

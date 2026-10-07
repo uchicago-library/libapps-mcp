@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Drive uc-libapps-mcp over stdio like an MCP client and check it against the live LibApps API.
+"""Drive libapps-mcp over stdio like an MCP client and check it against the live LibApps API.
 
 Credentials are read from an env file into the child process environment only; they are never
 printed. Artifacts (tool outputs and a summary) go to --out, outside the repo.
@@ -33,6 +33,15 @@ EXPECTED_TOOLS = {
 }
 FORBIDDEN_KEYS = {"email", "internal_note", "library_review", "customer_id", "account_id"}
 EMAIL_RE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
+
+
+def default_env_file() -> Path:
+    """LIBAPPS_ENV_FILE, else ~/.config/libapps-mcp/env, else the pre-rename uc-libapps-mcp path."""
+    if os.environ.get("LIBAPPS_ENV_FILE"):
+        return Path(os.environ["LIBAPPS_ENV_FILE"]).expanduser()
+    current = Path("~/.config/libapps-mcp/env").expanduser()
+    legacy = Path("~/.config/uc-libapps-mcp/env").expanduser()
+    return legacy if not current.exists() and legacy.exists() else current
 
 
 def load_env_file(path: Path) -> dict[str, str]:
@@ -140,7 +149,7 @@ class RawApi:
 def server_params(repo: Path, env: dict[str, str]) -> StdioServerParameters:
     return StdioServerParameters(
         command="uv",
-        args=["run", "--directory", str(repo), "python", "-m", "uc_libapps_mcp"],
+        args=["run", "--directory", str(repo), "python", "-m", "libapps_mcp"],
         env=env,
     )
 
@@ -152,7 +161,7 @@ async def drive_live(repo: Path, env: dict[str, str], run: Run, raw: RawApi | No
             async with ClientSession(read, write) as session:
                 init = await session.initialize()
                 info = init.server_info
-                run.check("initialize", info.name == "uc-libapps-mcp", f"server {info.name} {info.version}")
+                run.check("initialize", info.name == "libapps-mcp", f"server {info.name} {info.version}")
                 tools = {t.name for t in (await session.list_tools()).tools}
                 run.check("tools/list has exactly the 7 tools", tools == EXPECTED_TOOLS, f"{len(tools)} tools: {sorted(tools)}")
 
@@ -400,9 +409,8 @@ def main() -> int:
     parser.add_argument("tool", nargs="?", help="tool name for 'call'")
     parser.add_argument("arguments", nargs="?", default="{}", help="JSON object of tool arguments for 'call'")
     parser.add_argument("--repo", type=Path, default=Path(__file__).resolve().parents[4])
-    parser.add_argument("--env-file", type=Path, default=Path(os.environ.get(
-        "LIBAPPS_ENV_FILE", "~/.config/uc-libapps-mcp/env")).expanduser())
-    parser.add_argument("--out", type=Path, default=Path(f"/tmp/uc-libapps-mcp-verify/{time.strftime('%Y%m%d-%H%M%S')}"))
+    parser.add_argument("--env-file", type=Path, default=default_env_file())
+    parser.add_argument("--out", type=Path, default=Path(f"/tmp/libapps-mcp-verify/{time.strftime('%Y%m%d-%H%M%S')}"))
     parser.add_argument("--guide-id", help="guide to use for the sub-page content check")
     parser.add_argument("--no-cross-check", action="store_true", help="skip the independent raw API comparison")
     parser.add_argument("--only", choices=["live", "errors"], help="run one part of 'check'")

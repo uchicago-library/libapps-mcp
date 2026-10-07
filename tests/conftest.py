@@ -6,9 +6,9 @@ from typing import Any
 import httpx
 import pytest
 
-from uc_libapps_mcp.client import LibAppsClient
-from uc_libapps_mcp.config import Settings
-from uc_libapps_mcp.service import Service
+from libapps_mcp.client import LibAppsClient
+from libapps_mcp.config import Settings
+from libapps_mcp.service import Service
 
 FIXTURES = Path(__file__).parent / "fixtures"
 SECRET = "s3cr3t-FAKE-value"

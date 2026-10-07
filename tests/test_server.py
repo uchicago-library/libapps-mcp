@@ -4,7 +4,7 @@ import logging
 import pytest
 from conftest import SECRET, TOKEN
 
-from uc_libapps_mcp import server as server_mod
+from libapps_mcp import server as server_mod
 
 TOOL_NAMES = {
     "search_guides",

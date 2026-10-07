@@ -23,11 +23,11 @@ Preconditions:
 - `verify doctor` passes.
 - You know a guide with visible sub-pages. `verify check --only live` prints one in the `get_guide returns page tree with sub-pages` line (guide id and parent page name). Or get one from the `get_guide-<id>.json` artifact.
 
-- **Outline.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify call get_guide '{"guide_id": "<id>"}'`. `guide.pages[]` is a tree, and at least one page has non-empty `subpages` with `box_count` > 0.
-- **Page with sub-pages.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify call get_guide_content '{"guide_id": "<id>", "page_id": "<parent page_id>", "include_subpages": true, "max_chars": 60000}'`. `source` is "html". `pages[0]` is the parent, and the following pages have `parent_id` equal to it. Their `boxes[].markdown` hold real text and links. `missing` is absent or rare.
+- **Outline.** Run `.claude/skills/verify-libapps-mcp/scripts/verify call get_guide '{"guide_id": "<id>"}'`. `guide.pages[]` is a tree, and at least one page has non-empty `subpages` with `box_count` > 0.
+- **Page with sub-pages.** Run `.claude/skills/verify-libapps-mcp/scripts/verify call get_guide_content '{"guide_id": "<id>", "page_id": "<parent page_id>", "include_subpages": true, "max_chars": 60000}'`. `source` is "html". `pages[0]` is the parent, and the following pages have `parent_id` equal to it. Their `boxes[].markdown` hold real text and links. `missing` is absent or rare.
 - **Paging.** Repeat with `"max_chars": 500`. One or more boxes come back, possibly with `truncated: true`, and `next_offset` is a number. Call again with `"offset": <next_offset>` and the next boxes come back.
-- **API text.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify call get_guide_content '{"guide_id": "<id>", "source": "api", "max_chars": 4000}'`. The result has `placement: "unknown"` and non-empty `blocks[].markdown`.
-- **Not public.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify check --only live` and read the three `get_guide refuses ...` lines. Each must show `code=not_public` with a message that names only the id.
+- **API text.** Run `.claude/skills/verify-libapps-mcp/scripts/verify call get_guide_content '{"guide_id": "<id>", "source": "api", "max_chars": 4000}'`. The result has `placement: "unknown"` and non-empty `blocks[].markdown`.
+- **Not public.** Run `.claude/skills/verify-libapps-mcp/scripts/verify check --only live` and read the three `get_guide refuses ...` lines. Each must show `code=not_public` with a message that names only the id.
 
 ## Gotchas
 

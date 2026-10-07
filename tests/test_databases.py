@@ -2,7 +2,7 @@ import httpx
 import pytest
 from conftest import load
 
-from uc_libapps_mcp.errors import LibAppsError
+from libapps_mcp.errors import LibAppsError
 
 
 def test_search_drops_hidden_and_strips_sensitive_fields(fake, make_service):

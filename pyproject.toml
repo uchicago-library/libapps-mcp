@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "uc-libapps-mcp"
+name = "libapps-mcp"
 version = "0.1.0"
 description = "Read-only MCP server for LibGuides sites (Springshare LibApps API v1.2)"
 readme = "README.md"
@@ -24,7 +24,7 @@ dev = [
 ]
 
 [project.scripts]
-uc-libapps-mcp = "uc_libapps_mcp.server:main"
+libapps-mcp = "libapps_mcp.server:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

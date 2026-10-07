@@ -1,24 +1,24 @@
 ---
-name: verify-uc-libapps-mcp
+name: verify-libapps-mcp
 description: >-
-  Verify the LibApps MCP server (uc-libapps-mcp) the way an MCP client uses it:
+  Verify the LibApps MCP server (libapps-mcp) the way an MCP client uses it:
   start it over stdio, list tools, and call all 7 tools against the live,
   read-only LibApps API v1.2 and public LibGuides pages, with privacy, status
   filter, sub-page content and error-shape checks. Use after changing anything
-  in src/uc_libapps_mcp/, before calling a change done, or when the server
+  in src/libapps_mcp/, before calling a change done, or when the server
   misbehaves in an MCP host.
 ---
 
-# Verify uc-libapps-mcp
+# Verify libapps-mcp
 
-The product surface is a **stdio MCP server** (`python -m uc_libapps_mcp`) with 7 read-only tools. Nothing listens on a port. Every verification run spawns its own server process through the `mcp` SDK stdio client, so runs are isolated and can execute side by side. The driver never reuses a server an MCP host started.
+The product surface is a **stdio MCP server** (`python -m libapps_mcp`) with 7 read-only tools. Nothing listens on a port. Every verification run spawns its own server process through the `mcp` SDK stdio client, so runs are isolated and can execute side by side. The driver never reuses a server an MCP host started.
 
 Everything here is **read-only**: the OAuth token POST plus GETs to the LibApps API and the public guide site. Never add write calls, and never touch the LibApps admin.
 
 ## Credentials (never print them)
 
-- The driver reads `LIBAPPS_CLIENT_ID`, `LIBAPPS_CLIENT_SECRET`, `LIBAPPS_API_BASE` and `LIBGUIDES_SITE_URL` from an env file (default `~/.config/uc-libapps-mcp/env`, mode 600; override with `--env-file` or `LIBAPPS_ENV_FILE`). Values go into the child process environment only.
-- Do not `cat`, `echo`, `grep` or `source` that file in a transcript. If you need the values in a shell, use `(set -a; . ~/.config/uc-libapps-mcp/env; set +a; <command>)` so nothing is echoed.
+- The driver reads `LIBAPPS_CLIENT_ID`, `LIBAPPS_CLIENT_SECRET`, `LIBAPPS_API_BASE` and `LIBGUIDES_SITE_URL` from an env file (default `~/.config/libapps-mcp/env`, mode 600, falling back to the pre-rename `~/.config/uc-libapps-mcp/env` if only that exists; override with `--env-file` or `LIBAPPS_ENV_FILE`). Values go into the child process environment only.
+- Do not `cat`, `echo`, `grep` or `source` that file in a transcript. If you need the values in a shell, use `(set -a; . ~/.config/libapps-mcp/env; set +a; <command>)` so nothing is echoed.
 - A missing env file means you cannot run live checks. Report it; do not invent credentials.
 
 ## Launch
@@ -33,19 +33,19 @@ uv sync --extra dev          # once; installs mcp, httpx, bs4, markdownify, pyte
 All driving goes through one helper, which runs inside the repo's uv environment:
 
 ```bash
-.claude/skills/verify-uc-libapps-mcp/scripts/verify doctor
-.claude/skills/verify-uc-libapps-mcp/scripts/verify check
-.claude/skills/verify-uc-libapps-mcp/scripts/verify call <tool> '<json args>'
+.claude/skills/verify-libapps-mcp/scripts/verify doctor
+.claude/skills/verify-libapps-mcp/scripts/verify check
+.claude/skills/verify-libapps-mcp/scripts/verify call <tool> '<json args>'
 ```
 
-Each command spawns `uv run --directory <repo> python -m uc_libapps_mcp` as a stdio child, sends `initialize`, and talks MCP to it. The server is ready when `initialize` returns `serverInfo.name == "uc-libapps-mcp"`. The child exits when the command finishes, so there is no separate teardown.
+Each command spawns `uv run --directory <repo> python -m libapps_mcp` as a stdio child, sends `initialize`, and talks MCP to it. The server is ready when `initialize` returns `serverInfo.name == "libapps-mcp"`. The child exits when the command finishes, so there is no separate teardown.
 
 ## Doctor
 
 Run this first, and again whenever anything looks off:
 
 ```bash
-.claude/skills/verify-uc-libapps-mcp/scripts/verify doctor
+.claude/skills/verify-libapps-mcp/scripts/verify doctor
 ```
 
 It must print three PASS lines: the server starts (with name, version, repo path and git short SHA, so you know which build you are driving), `tools/list` returns exactly the 7 tools, and `list_subjects` succeeds. That proves credentials, region host and the `subjects_get` scope. `list_subjects` is the cheapest live call, about 6 KB. A FAIL with `code=auth_failed` means bad credentials. `config_missing` means the env file lacks a variable. `scope_missing` means the LibApps app lacks a GET scope.
@@ -78,7 +78,7 @@ It must print three PASS lines: the server starts (with name, version, repo path
 
 ## Evidence
 
-- Every run writes to `--out`, default `/tmp/uc-libapps-mcp-verify/<YYYYmmdd-HHMMSS>/`, outside the repo so artifacts never get committed. It contains:
+- Every run writes to `--out`, default `/tmp/libapps-mcp-verify/<YYYYmmdd-HHMMSS>/`, outside the repo so artifacts never get committed. It contains:
   - `NN-<label>.json`: each tool result, exactly as the client received it.
   - `server-stderr*.log`: server stderr for each scenario.
   - `summary.json`: one entry per command run into that directory, listing every check with pass/fail and an evidence string. Reusing `--out` for several `call`s appends; artifacts keep counting up and are never overwritten.
@@ -87,12 +87,12 @@ It must print three PASS lines: the server starts (with name, version, repo path
   - Exercise the real stdio path, not `Service` methods. The unit tests already cover those with mocks.
   - Pair each action (the tool call) with its resulting state (the JSON).
   - For exclusion claims, the cross-check against raw API data is the side-effect proof. A result that merely looks clean is not proof.
-- Unit tests are a separate gate: `uv run pytest -q`. They are mocked and offline. The opt-in live test is `(set -a; . ~/.config/uc-libapps-mcp/env; set +a; LIBAPPS_LIVE_TESTS=1 uv run pytest -m live -q)`.
+- Unit tests are a separate gate: `uv run pytest -q`. They are mocked and offline. The opt-in live test is `(set -a; . ~/.config/libapps-mcp/env; set +a; LIBAPPS_LIVE_TESTS=1 uv run pytest -m live -q)`.
 
 ## Cleanup
 
-- Each command waits for its own server child to exit. If a run is interrupted, find only the processes it started: `pgrep -af "uc_libapps_mcp"`. Kill those PIDs, and never kill by name a server an MCP host launched.
-- Keep the artifact directory. It is the proof. Delete old runs under `/tmp/uc-libapps-mcp-verify/` only when asked.
+- Each command waits for its own server child to exit. If a run is interrupted, find only the processes it started: `pgrep -af "libapps_mcp"`. Kill those PIDs, and never kill by name a server an MCP host launched.
+- Keep the artifact directory. It is the proof. Delete old runs under `/tmp/libapps-mcp-verify/` only when asked.
 
 ## Gotchas
 

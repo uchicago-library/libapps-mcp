@@ -4,8 +4,8 @@ import os
 
 import pytest
 
-from uc_libapps_mcp.config import load_settings
-from uc_libapps_mcp.service import Service
+from libapps_mcp.config import load_settings
+from libapps_mcp.service import Service
 
 pytestmark = [
     pytest.mark.live,

@@ -15,7 +15,7 @@ API_HOSTS = frozenset(
     f"lgapi-{region}.libapps.com" for region in ("us", "ca", "eu", "au")
 )
 DEFAULT_USER_AGENT = (
-    f"uc-libapps-mcp/{__version__} (+https://github.com/uchicago-library/uc-libapps-mcp)"
+    f"libapps-mcp/{__version__} (+https://github.com/uchicago-library/libapps-mcp)"
 )
 
 _TRUE = {"1", "true", "yes", "on"}

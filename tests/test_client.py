@@ -4,7 +4,7 @@ import httpx
 import pytest
 from conftest import SECRET, SITE, TOKEN, FakeLibApps, json_response, make_client
 
-from uc_libapps_mcp.errors import LibAppsError
+from libapps_mcp.errors import LibAppsError
 
 
 class Clock:
@@ -23,7 +23,7 @@ def test_token_cached_and_headers(fake):
     request = fake.api_calls[0]
     assert request.headers["accept"] == "application/json"
     assert request.headers["accept-encoding"] == "gzip"
-    assert request.headers["user-agent"].startswith("uc-libapps-mcp/")
+    assert request.headers["user-agent"].startswith("libapps-mcp/")
 
 
 def test_token_request_form(fake):

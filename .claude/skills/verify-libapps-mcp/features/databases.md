@@ -21,10 +21,10 @@ Preconditions:
 
 - `verify doctor` passes.
 
-- **Search.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify call search_databases '{"query": "jstor", "limit": 5}'`. The result has `ok: true`, and the database named exactly "JSTOR" (if the site has one) ranks first. Items have `id, name, url, proxied, vendor, description, subjects, types`.
-- **Filter.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify call search_databases '{"subject": "<subject name>", "limit": 5}'`. Every item's `subjects` include that subject.
-- **Get one.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify call get_database '{"database_id": "<id from search>"}'`. The result has `database.id` equal to the id and the full `description`, plus `more_info` when the site has it.
-- **Hidden and private fields.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify check --only live` and read `search_databases excludes hidden A-Z items` (total equals the raw count minus hidden), `get_database refuses hidden item`, and the privacy line. All must PASS.
+- **Search.** Run `.claude/skills/verify-libapps-mcp/scripts/verify call search_databases '{"query": "jstor", "limit": 5}'`. The result has `ok: true`, and the database named exactly "JSTOR" (if the site has one) ranks first. Items have `id, name, url, proxied, vendor, description, subjects, types`.
+- **Filter.** Run `.claude/skills/verify-libapps-mcp/scripts/verify call search_databases '{"subject": "<subject name>", "limit": 5}'`. Every item's `subjects` include that subject.
+- **Get one.** Run `.claude/skills/verify-libapps-mcp/scripts/verify call get_database '{"database_id": "<id from search>"}'`. The result has `database.id` equal to the id and the full `description`, plus `more_info` when the site has it.
+- **Hidden and private fields.** Run `.claude/skills/verify-libapps-mcp/scripts/verify check --only live` and read `search_databases excludes hidden A-Z items` (total equals the raw count minus hidden), `get_database refuses hidden item`, and the privacy line. All must PASS.
 
 ## Gotchas
 

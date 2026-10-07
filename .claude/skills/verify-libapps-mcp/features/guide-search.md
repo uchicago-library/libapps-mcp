@@ -21,11 +21,11 @@ Preconditions:
 
 - `verify doctor` passes.
 
-- **Relevance search.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify call search_guides '{"query": "chemistry", "limit": 5}'`. The JSON has `ok: true`, `source: "server"`, `total` > 0, and `guides[].rank` starting at 1. The top hit's name matches the topic.
-- **Local listing.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify call search_guides '{"limit": 3}'`. The result has `source: "local"`, alphabetical names, and `next_offset: 3`.
-- **Filters.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify call search_guides '{"subject": "<subject name from list_subjects>", "limit": 5}'`. Every result's `subjects` include the subject. Then run `... call search_guides '{"guide_type": "course", "limit": 5}'`. Every `type` is "Course Guide". Combined filters can legitimately return `total: 0`, for example when course guides carry no subjects.
+- **Relevance search.** Run `.claude/skills/verify-libapps-mcp/scripts/verify call search_guides '{"query": "chemistry", "limit": 5}'`. The JSON has `ok: true`, `source: "server"`, `total` > 0, and `guides[].rank` starting at 1. The top hit's name matches the topic.
+- **Local listing.** Run `.claude/skills/verify-libapps-mcp/scripts/verify call search_guides '{"limit": 3}'`. The result has `source: "local"`, alphabetical names, and `next_offset: 3`.
+- **Filters.** Run `.claude/skills/verify-libapps-mcp/scripts/verify call search_guides '{"subject": "<subject name from list_subjects>", "limit": 5}'`. Every result's `subjects` include the subject. Then run `... call search_guides '{"guide_type": "course", "limit": 5}'`. Every `type` is "Course Guide". Combined filters can legitimately return `total: 0`, for example when course guides carry no subjects.
 - **Paging.** Run the listing again with `"offset": 3`. The first result is the 4th name from the previous run.
-- **Published-only proof.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify check --only live` and read the lines `search_guides results are published only` and `search_guides listing total == published non-internal guides`. Both must PASS.
+- **Published-only proof.** Run `.claude/skills/verify-libapps-mcp/scripts/verify check --only live` and read the lines `search_guides results are published only` and `search_guides listing total == published non-internal guides`. Both must PASS.
 
 ## Gotchas
 

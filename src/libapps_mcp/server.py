@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 READ_ONLY = ToolAnnotations(read_only_hint=True, open_world_hint=True)
 
 mcp = MCPServer(
-    "uc-libapps-mcp",
+    "libapps-mcp",
     version=__version__,
     instructions=(
         "Read-only access to a LibGuides site: published research guides, their pages "

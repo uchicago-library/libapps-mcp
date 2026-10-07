@@ -2,4 +2,4 @@
 # Run the stdio driver inside the repo's uv environment. Usage: verify doctor|check|call <tool> '<json>' [options]
 set -euo pipefail
 repo="$(cd "$(dirname "$0")/../../../.." && pwd)"
-exec uv run --directory "$repo" python "$repo/.claude/skills/verify-uc-libapps-mcp/scripts/drive.py" "$@"
+exec uv run --directory "$repo" python "$repo/.claude/skills/verify-libapps-mcp/scripts/drive.py" "$@"

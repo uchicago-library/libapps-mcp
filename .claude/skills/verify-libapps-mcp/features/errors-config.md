@@ -20,9 +20,9 @@ Preconditions:
 
 - None for the missing-credential case. One rejected token POST for the bad-secret case.
 
-- **Both credential cases.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify check --only errors`. Two PASS lines: every tool returns `config_missing` with no credentials and `auth_failed` with a bogus secret, and nothing leaks into outputs or `server-stderr-*.log`.
-- **Invalid input.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify call get_guide '{"guide_id": "abc"}'`. The result is exactly `{"ok": false, "error": "guide_id must be a numeric id.", "code": "invalid_input"}`.
-- **Not found.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify call get_guide '{"guide_id": "1"}'`. The result has `code: "not_found"`.
+- **Both credential cases.** Run `.claude/skills/verify-libapps-mcp/scripts/verify check --only errors`. Two PASS lines: every tool returns `config_missing` with no credentials and `auth_failed` with a bogus secret, and nothing leaks into outputs or `server-stderr-*.log`.
+- **Invalid input.** Run `.claude/skills/verify-libapps-mcp/scripts/verify call get_guide '{"guide_id": "abc"}'`. The result is exactly `{"ok": false, "error": "guide_id must be a numeric id.", "code": "invalid_input"}`.
+- **Not found.** Run `.claude/skills/verify-libapps-mcp/scripts/verify call get_guide '{"guide_id": "1"}'`. The result has `code: "not_found"`.
 
 ## Gotchas
 

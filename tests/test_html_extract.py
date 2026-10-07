@@ -1,6 +1,6 @@
 from conftest import FIXTURES
 
-from uc_libapps_mcp.html_extract import extract_boxes, html_to_markdown, plain_text
+from libapps_mcp.html_extract import extract_boxes, html_to_markdown, plain_text
 
 PAGE_URL = "https://guides.example.edu/c.php?g=101&p=2001"
 

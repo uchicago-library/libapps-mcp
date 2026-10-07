@@ -1,12 +1,12 @@
-# uc-libapps-mcp verification map
+# libapps-mcp verification map
 
 This directory is the maintained source for verifying the user-facing behavior of the LibApps MCP server. The "user" is an MCP client, such as Claude Desktop or another stdio host, calling tools on behalf of a person. Read this index before driving the server, then use the matching feature file as the recipe.
 
 ## Baseline preconditions
 
 - The repo checkout is the build under test. `uv sync --extra dev` has run once.
-- A read-only LibApps v1.2 env file exists at `~/.config/uc-libapps-mcp/env` (or `--env-file`), and its values are never printed.
-- `.claude/skills/verify-uc-libapps-mcp/scripts/verify doctor` prints three PASS lines and the expected git SHA.
+- A read-only LibApps v1.2 env file exists at `~/.config/libapps-mcp/env` (or `--env-file`), and its values are never printed.
+- `.claude/skills/verify-libapps-mcp/scripts/verify doctor` prints three PASS lines and the expected git SHA.
 - Every command spawns its own stdio server. Never attach to a server an MCP host started.
 
 ## Driving conventions

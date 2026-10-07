@@ -2,7 +2,7 @@ import httpx
 import pytest
 from conftest import SITE
 
-from uc_libapps_mcp.errors import LibAppsError
+from libapps_mcp.errors import LibAppsError
 
 
 def ids(result):

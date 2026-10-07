@@ -1,4 +1,4 @@
-# uc-libapps-mcp
+# libapps-mcp
 
 Read-only MCP server for **LibGuides** sites, built on the Springshare LibApps
 API v1.2. It lets an AI assistant browse published research guides (including
@@ -38,14 +38,14 @@ with placeholder values. Rotate the secret if it is ever exposed.
 ## Install
 
 ```bash
-cd /path/to/uc-libapps-mcp
+cd /path/to/libapps-mcp
 uv sync --extra dev
 ```
 
 ## Claude / MCP host config
 
 Point Claude Desktop (or another stdio MCP host) at the checkout with
-`uv run --directory`. Replace `/path/to/uc-libapps-mcp` with your clone path
+`uv run --directory`. Replace `/path/to/libapps-mcp` with your clone path
 and the placeholder values with your own:
 
 ```json
@@ -56,10 +56,10 @@ and the placeholder values with your own:
       "args": [
         "run",
         "--directory",
-        "/path/to/uc-libapps-mcp",
+        "/path/to/libapps-mcp",
         "python",
         "-m",
-        "uc_libapps_mcp"
+        "libapps_mcp"
       ],
       "env": {
         "LIBAPPS_API_BASE": "https://lgapi-us.libapps.com",
@@ -72,7 +72,7 @@ and the placeholder values with your own:
 }
 ```
 
-You can also run the console script `uv run uc-libapps-mcp` from a shell for a
+You can also run the console script `uv run libapps-mcp` from a shell for a
 quick smoke check.
 
 ## Configuration
@@ -92,7 +92,7 @@ All settings are environment variables. They are read at the first tool call.
 | `LIBAPPS_TIMEOUT` | `30` | HTTP timeout (seconds) |
 | `LIBAPPS_MAX_CONCURRENCY` | `4` | Maximum concurrent upstream requests |
 | `LIBAPPS_MAX_CHARS` | `20000` | Default markdown budget per `get_guide_content` call |
-| `LIBAPPS_USER_AGENT` | `uc-libapps-mcp/0.1.0 (+repo URL)` | User agent for all requests |
+| `LIBAPPS_USER_AGENT` | `libapps-mcp/0.1.0 (+repo URL)` | User agent for all requests |
 | `LIBAPPS_LOG_LEVEL` | `WARNING` | Log level; logs go to stderr only |
 
 ## Tools
@@ -216,7 +216,10 @@ Notes on the API behaviors this server relies on are in
 
 To verify a running server end to end against the live API (stdio startup,
 every tool, privacy and status filters, error shapes), follow
-[`.claude/skills/verify-uc-libapps-mcp/SKILL.md`](.claude/skills/verify-uc-libapps-mcp/SKILL.md).
+[`.claude/skills/verify-libapps-mcp/SKILL.md`](.claude/skills/verify-libapps-mcp/SKILL.md).
+Its driver reads credentials from `~/.config/libapps-mcp/env`. If only
+`~/.config/uc-libapps-mcp/env` exists (the path used before this project was
+renamed from `uc-libapps-mcp`), it reads that instead.
 
 ## Phase 2: hosted (later)
 

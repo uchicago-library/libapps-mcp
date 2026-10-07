@@ -18,10 +18,10 @@ Preconditions:
 
 - `verify doctor` passes.
 
-- **List subjects.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify call list_subjects '{}'`. The result has `total` > 0 and items `{id, name, slug, parent_id}`.
-- **Find librarians.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify call find_subject_librarians '{"subject": "<subject name>"}'`. The result has `subject` resolved, and each librarian has `name` and `profile_url`, with only the keys `name, title, pronouns, profile_url, image_url, subjects, phone, address, website`. There is no `email`.
-- **Ambiguous input.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify call find_subject_librarians '{"subject": "stud"}'` or any substring that matches several names. The result has `code: "invalid_input"` and lists candidates.
-- **Public-only proof.** Run `.claude/skills/verify-uc-libapps-mcp/scripts/verify check --only live` and read `find_subject_librarians excludes non-public profiles`. It must PASS.
+- **List subjects.** Run `.claude/skills/verify-libapps-mcp/scripts/verify call list_subjects '{}'`. The result has `total` > 0 and items `{id, name, slug, parent_id}`.
+- **Find librarians.** Run `.claude/skills/verify-libapps-mcp/scripts/verify call find_subject_librarians '{"subject": "<subject name>"}'`. The result has `subject` resolved, and each librarian has `name` and `profile_url`, with only the keys `name, title, pronouns, profile_url, image_url, subjects, phone, address, website`. There is no `email`.
+- **Ambiguous input.** Run `.claude/skills/verify-libapps-mcp/scripts/verify call find_subject_librarians '{"subject": "stud"}'` or any substring that matches several names. The result has `code: "invalid_input"` and lists candidates.
+- **Public-only proof.** Run `.claude/skills/verify-libapps-mcp/scripts/verify check --only live` and read `find_subject_librarians excludes non-public profiles`. It must PASS.
 
 ## Gotchas
 
